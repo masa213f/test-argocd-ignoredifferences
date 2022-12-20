@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: test
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/masa213f/test.git
+    targetRevision: main
+    path: before
+  destination:
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    syncOptions:
+      - RespectIgnoreDifferences=true
+  ignoreDifferences:
+    - group: ceph.rook.io
+      kind: CephCluster
+      jqPathExpressions:
+        - .spec.storage.storageClassDeviceSets[].count
