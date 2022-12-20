@@ -40,3 +40,8 @@ $ ./argocd app diff testapp
 >               - key: ssd
 >                 operator: Exists
 ```
+
+```console
+$ kubectl delete cephcluster cluster
+$ kubectl delete app -n argocd testapp
+```
