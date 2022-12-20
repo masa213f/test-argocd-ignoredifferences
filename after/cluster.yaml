@@ -5,9 +5,9 @@ metadata:
   namespace: default
 spec:
   mon:
-    count: 3
+    count: 4
   mgr:
-    count: 3
+    count: 2
   storage:
     storageClassDeviceSets:
       - name: hdd
