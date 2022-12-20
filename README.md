@@ -14,10 +14,10 @@ $ kubectl apply -f https://raw.githubusercontent.com/masa213f/test/main/applicat
 $ PASS=$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d)
 $ argocd login --insecure localhost:8080 --username admin --password ${PASS}
 
-$ ./argocd app sync test
-$ ./argocd app set test --path after
-$ ./argocd app sync test
-$ ./argocd app diff test
+$ ./argocd app sync testapp
+$ ./argocd app set testapp --path after
+$ ./argocd app sync testapp
+$ ./argocd app diff testapp
 
 ===== ceph.rook.io/CephCluster default/cluster ======
 61a62,67
