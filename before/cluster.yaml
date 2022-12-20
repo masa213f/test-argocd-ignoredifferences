@@ -2,6 +2,7 @@ apiVersion: ceph.rook.io/v1
 kind: CephCluster
 metadata:
   name: cluster
+  namespace: default
 spec:
   mon:
     count: 3
