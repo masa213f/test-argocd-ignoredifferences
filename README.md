@@ -15,8 +15,12 @@ $ ./argocd login --insecure localhost:8080 --username admin --password ${PASS}
 $ kubectl apply -f https://raw.githubusercontent.com/masa213f/test/main/application.yaml
 
 $ ./argocd app sync testapp
+$ kubectl get cephcluster cluster -o yaml
+
 $ ./argocd app set testapp --path after
 $ ./argocd app sync testapp
+$ kubectl get cephcluster cluster -o yaml
+
 $ ./argocd app diff testapp
 
 ===== ceph.rook.io/CephCluster default/cluster ======
