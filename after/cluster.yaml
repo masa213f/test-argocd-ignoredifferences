@@ -1,0 +1,48 @@
+apiVersion: ceph.rook.io/v1
+kind: CephCluster
+metadata:
+  name: cluster
+  namespace: default
+spec:
+  mon:
+    count: 3
+  mgr:
+    count: 2
+  storage:
+    storageClassDeviceSets:
+      - name: hdd
+        count: 3
+        volumeClaimTemplates:
+          - metadata:
+              name: data
+        placement:
+          tolerations:
+            - key: hdd
+          topologySpreadConstraints:
+            - maxSkew: 1
+              topologyKey: topology.kubernetes.io/zone
+              whenUnsatisfiable: ScheduleAnyway
+            - maxSkew: 1
+              topologyKey: kubernetes.io/hostname
+              whenUnsatisfiable: ScheduleAnyway
+      - name: ssd
+        count: 3
+        volumeClaimTemplates:
+          - metadata:
+              name: data
+        placement:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                  - key: ssd
+                    operator: Exists
+          tolerations:
+            - key: ssd
+          topologySpreadConstraints:
+            - maxSkew: 1
+              topologyKey: topology.kubernetes.io/zone
+              whenUnsatisfiable: ScheduleAnyway
+            - maxSkew: 1
+              topologyKey: kubernetes.io/hostname
+              whenUnsatisfiable: ScheduleAnyway
