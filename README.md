@@ -20,7 +20,7 @@ $ PASS=$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{
 $ ./argocd login --insecure localhost:8080 --username admin --password ${PASS}
 
 $ kubectl apply -f https://raw.githubusercontent.com/rook/rook/v1.10.5/deploy/examples/crds.yaml
-$ kubectl apply -f https://raw.githubusercontent.com/masa213f/test/main/application.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/masa213f/test-argocd-ignoredifferences/main/application.yaml
 
 $ ./argocd app sync testapp
 $ kubectl get cephcluster cluster -o yaml
