@@ -5,6 +5,7 @@ metadata:
   namespace: default
 spec:
   mon:
+    # change: 3 -> 4
     count: 4
   mgr:
     count: 2
@@ -26,11 +27,13 @@ spec:
               topologyKey: kubernetes.io/hostname
               whenUnsatisfiable: ScheduleAnyway
       - name: ssd
+        # change: 3 -> 5
         count: 5
         volumeClaimTemplates:
           - metadata:
               name: data
         placement:
+          # add
           nodeAffinity:
             requiredDuringSchedulingIgnoredDuringExecution:
               nodeSelectorTerms:
@@ -39,6 +42,7 @@ spec:
                     operator: Exists
           tolerations:
             - key: ssd
+          # change: maxSkew 1 -> 2, whenUnsatisfiable ScheduleAnyway -> DoNotSchedule
           topologySpreadConstraints:
             - maxSkew: 2
               topologyKey: topology.kubernetes.io/zone
