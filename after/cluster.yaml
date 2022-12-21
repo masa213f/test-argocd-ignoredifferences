@@ -12,6 +12,7 @@ spec:
   storage:
     storageClassDeviceSets:
       - name: hdd
+        # change: 4 -> 5
         count: 4
         volumeClaimTemplates:
           - metadata:
