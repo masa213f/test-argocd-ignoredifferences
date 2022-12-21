@@ -1,8 +1,11 @@
 # test
 
 ```console
+$ ARGOCD_VERSION=v2.4.17
 $ kubectl create namespace argocd
-$ kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v2.4.17/manifests/install.yaml
+$ kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/${ARGOCD_VERSION}/manifests/install.yaml
+$ curl -sSL -o argocd https://github.com/argoproj/argo-cd/releases/download/${ARGOCD_VERSION}/argocd-linux-amd64
+$ chmod +x argocd
 
 $ kubectl edit cm -n argocd argocd-cmd-params-cm
 ...
@@ -12,10 +15,7 @@ data:                          # Add
 $ kubectl rollout restart sts -n argocd argocd-application-controller
 $ kubectl rollout status sts -n argocd argocd-application-controller
 
-$ curl -sSL -o argocd https://github.com/argoproj/argo-cd/releases/download/v2.4.17/argocd-linux-amd64
-$ chmod +x argocd
 $ kubectl port-forward svc/argocd-server -n argocd 8080:443 &> /dev/null &
-
 $ PASS=$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d)
 $ ./argocd login --insecure localhost:8080 --username admin --password ${PASS}
 
