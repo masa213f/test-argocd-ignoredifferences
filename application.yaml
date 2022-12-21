@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/masa213f/test.git
+    repoURL: https://github.com/masa213f/test-argocd-ignoredifferences.git
     targetRevision: main
     path: before
   destination:
