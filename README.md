@@ -29,8 +29,7 @@ $ ./argocd app set testapp --path after
 $ ./argocd app sync testapp
 $ kubectl get cephcluster cluster -o yaml
 
-$ ./argocd app diff testapp
-
+$ ./argocd app diff testapp                                                                                                           
 ===== ceph.rook.io/CephCluster default/cluster ======
 61a62,67
 >         nodeAffinity:
@@ -39,6 +38,20 @@ $ ./argocd app diff testapp
 >             - matchExpressions:
 >               - key: ssd
 >                 operator: Exists
+65c71
+<         - maxSkew: 1
+---
+>         - maxSkew: 2
+67,68c73,74
+<           whenUnsatisfiable: ScheduleAnyway
+<         - maxSkew: 1
+---
+>           whenUnsatisfiable: DoNotSchedule
+>         - maxSkew: 2
+70c76
+<           whenUnsatisfiable: ScheduleAnyway
+---
+>           whenUnsatisfiable: DoNotSchedule
 ```
 
 ```console
